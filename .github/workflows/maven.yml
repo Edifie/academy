@@ -32,4 +32,5 @@ jobs:
           tag_name: "oo_image_oo"
       - uses: Edifie/academy/.github/actions/docker_image_push@main
         with:
-          docker_username: "dilantaskin721"
+          docker_username: ${{ secrets.DOCKERHUB_USERNAME }}
+          docker_token: ${{ secrets.DOCKERHUB_TOKEN }}
