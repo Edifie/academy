@@ -1,0 +1,1 @@
+ALTER TABLE t_team DROP CONSTRAINT t_team_default_location_check;

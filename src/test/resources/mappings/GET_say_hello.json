@@ -1,0 +1,17 @@
+{
+  "request": {
+    "method": "GET",
+    "url" : "/external/hello"
+  },
+
+  "response": {
+    "status": 400,
+    "jsonBody": {
+      "title": "test",
+      "description": "des test"
+    },
+    "headers": {
+      "Content-Type": "application/json"
+    }
+  }
+}

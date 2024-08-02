@@ -1,0 +1,160 @@
+---
+openapi: 3.0.3
+info:
+  title: workstation-rack API
+  version: 1.0.0-SNAPSHOT
+paths:
+  /bookings:
+    post:
+      tags:
+        - Booking Resource
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/BookingDTO"
+      responses:
+        "200":
+          description: OK
+  /hello:
+    get:
+      tags:
+        - Greeting Resource
+      responses:
+        "200":
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: string
+  /racks:
+    get:
+      tags:
+        - Rack Resource
+      parameters:
+        - name: status
+          in: query
+          schema:
+            type: string
+      responses:
+        "200":
+          description: "Get all racks: OK"
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/RackDTO"
+    post:
+      tags:
+        - Rack Resource
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/RackDTO"
+      responses:
+        "201":
+          description: Rack created.
+  /racks/{id}:
+    get:
+      tags:
+        - Rack Resource
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            format: int64
+            type: integer
+      responses:
+        "200":
+          description: Rack found.
+    put:
+      tags:
+        - Rack Resource
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            format: int64
+            type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/RackDTO"
+      responses:
+        "200":
+          description: OK
+    delete:
+      tags:
+        - Rack Resource
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            format: int64
+            type: integer
+      responses:
+        "200":
+          description: OK
+  /teams:
+    post:
+      tags:
+        - Team Resource
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/TeamDTO"
+      responses:
+        "200":
+          description: OK
+components:
+  schemas:
+    BookingDTO:
+      type: object
+      properties:
+        id:
+          format: int64
+          type: integer
+        rackId:
+          format: int64
+          type: integer
+        requesterId:
+          format: int64
+          type: integer
+        bookFrom:
+          $ref: "#/components/schemas/LocalDateTime"
+        bookTo:
+          $ref: "#/components/schemas/LocalDateTime"
+    LocalDateTime:
+      format: date-time
+      type: string
+      example: 2022-03-10T12:15:50
+    RackDTO:
+      type: object
+      properties:
+        id:
+          format: int64
+          type: integer
+        serialNumber:
+          type: string
+        status:
+          type: string
+        teamId:
+          format: int64
+          type: integer
+    TeamDTO:
+      type: object
+      properties:
+        id:
+          format: int64
+          type: integer
+        name:
+          type: string
+        product:
+          type: string
