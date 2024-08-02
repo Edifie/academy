@@ -17,6 +17,9 @@ inputs:
   docker_token:
     description: Docker docker
     default: ""
+  docker_repository:
+    description: Repository name
+    default: "dilantaskin721/academy"
 runs:
   using: composite
   steps:
@@ -28,15 +31,6 @@ runs:
       with:
         username: ${{ inputs.docker_username }}
         password: ${{ inputs.docker_token }}
-    - name: Build Docker image
-      shell: bash
-      run: docker build . --file ${{ inputs.dockerfile_path }} --tag ${{ inputs.image_name }}:${{ inputs.tag_name }}
-    - name: List Docker images
-      shell: bash
-      run: docker image ls
-    - name: Export GitHub Environmnet
-      shell: bash
-      run: echo "DOCKER_IMAGE_NAME=${{ inputs.image_name }}" >> $GITHUB_ENV
     - name: Push the image to Docker GitHub
       shell: bash
-      run: docker tag ${{ inputs.image_name}} ${{ inputs.docker_username }}  academy
+      run: docker tag ${{ inputs.image_name}}:${{ inputs.tag_name}} ${{ inputs.docker_repository }}:${{ inputs.image_name}}
