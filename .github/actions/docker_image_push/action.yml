@@ -33,4 +33,6 @@ runs:
         password: ${{ inputs.docker_token }}
     - name: Push the image to Docker GitHub
       shell: bash
-      run: docker tag ${{ inputs.image_name}}:${{ inputs.tag_name}} ${{ inputs.docker_repository }}:${{ inputs.image_name}}
+      run: |
+        docker image tag ${{ inputs.image_name}}:${{ inputs.tag_name}} ${{ inputs.docker_repository }}:${{ inputs.image_name}}
+        docker push ${{ inputs.docker_repository }}:${{ inputs.image_name}}
