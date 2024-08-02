@@ -20,14 +20,14 @@ runs:
     - name: Build Docker Image with input variables
       shell: bash
       run: |
-        if [ -z "${{ inputs.{{tag-name}} }}" ]; then
+        if [ -z "${{ inputs.tag_name }}" ]; then
           echo "TAG=$(date +%s)" >> $GITHUB_ENV
         else
-          echo "TAG=${{ inputs.{{tag-name}} }}" >> $GITHUB_ENV
+          echo "TAG=${{ inputs.tag_name}}" >> $GITHUB_ENV
         fi
     - name: Build Docker image
       shell: bash
-      run: docker build . --file ${{ inputs.dockerfile_path }} --tag ${{ inputs.image_name }}:${{ tag_name }}
+      run: docker build . --file ${{ inputs.docker_name }} --tag ${{ inputs.image_name }}:${{ inputs.tag_name }}
     - name: List Docker images
       shell: bash
       run: docker image ls
