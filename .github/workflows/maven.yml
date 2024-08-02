@@ -40,6 +40,7 @@ jobs:
           distribution: "temurin"
           cache: maven
       - uses: Edifie/academy/.github/actions/maven_build@main
+      - run: mvn test
       - uses: Edifie/academy/.github/actions/docker_build@main
         with:
           tag_name: "oo_image_oo"
