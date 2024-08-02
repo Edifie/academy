@@ -2,22 +2,21 @@ package com.ctw.workstation.team.control;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.mockito.ArgumentMatchers.any;
-
-import io.quarkus.test.Mock;
-import io.quarkus.test.junit.mockito.InjectSpy;
-import jakarta.inject.Inject;
 import org.junit.jupiter.api.Test;
-import org.mockito.InjectMocks;
+import static org.mockito.ArgumentMatchers.any;
 import org.mockito.Mockito;
 
+import com.ctw.workstation.CommonProfile;
 import com.ctw.workstation.team.entity.Team;
 import com.ctw.workstation.team.repository.TeamRepository;
 
-import io.quarkus.test.InjectMock;
 import io.quarkus.test.junit.QuarkusTest;
+import io.quarkus.test.junit.TestProfile;
+import io.quarkus.test.junit.mockito.InjectSpy;
+import jakarta.inject.Inject;
 
 @QuarkusTest
+@TestProfile(CommonProfile.class)
 class TeamServiceTest {
 
     @Inject
@@ -25,7 +24,6 @@ class TeamServiceTest {
 
     @InjectSpy
     TeamRepository teamRepository;
-
 
     @Test
     void findAll() {
@@ -46,7 +44,7 @@ class TeamServiceTest {
     @Test
     void update_when_existedTeamOpt_is_null() {
         // given
-        Team team = new Team(2L,"Test", "TestProduct", "Lisbon");
+        Team team = new Team(2L, "Test", "TestProduct", "Lisbon");
         Team existedTeam = new Team(2L, "Test", "ExampleProduct", "Lisbon");
         // when
         Mockito.when(teamRepository.findById(team.getId())).thenReturn(existedTeam);
@@ -56,9 +54,9 @@ class TeamServiceTest {
         Team updatedTeam = teamService.update(existedTeam);
         // assert
         assertNotNull(updatedTeam);
-        assertEquals(updatedTeam.getName(),team.getName());
-        assertEquals(updatedTeam.getProduct(),team.getProduct());
-        assertEquals(updatedTeam.getDefaultLocation(),team.getDefaultLocation());
+        assertEquals(updatedTeam.getName(), team.getName());
+        assertEquals(updatedTeam.getProduct(), team.getProduct());
+        assertEquals(updatedTeam.getDefaultLocation(), team.getDefaultLocation());
     }
 
 //    @Test
@@ -74,8 +72,6 @@ class TeamServiceTest {
 //
 //        verify(teamRepository, times(1)).persist(existingTeam);
 //    }
-
-
     void update_when_existedTeamOpt_is_not_null() {
     }
 

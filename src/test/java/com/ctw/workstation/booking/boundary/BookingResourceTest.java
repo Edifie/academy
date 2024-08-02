@@ -3,24 +3,25 @@ package com.ctw.workstation.booking.boundary;
 import java.time.LocalDateTime;
 import java.util.List;
 
-import org.junit.Ignore;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
 
+import com.ctw.workstation.CommonProfile;
 import com.ctw.workstation.booking.control.BookingService;
 import com.ctw.workstation.booking.entity.Booking;
 import com.ctw.workstation.booking.repository.BookingRepository;
 
 import io.quarkus.test.InjectMock;
 import io.quarkus.test.junit.QuarkusTest;
+import io.quarkus.test.junit.TestProfile;
 import jakarta.inject.Inject;
 
 @QuarkusTest
-@Ignore
 @TestMethodOrder(MethodOrderer.MethodName.class)
+@TestProfile(CommonProfile.class)
 class BookingResourceTest {
 
     @Inject
