@@ -11,6 +11,9 @@ runs:
     - run: |
         echo "Update me with the necessary steps to build the application"
       shell: bash
-    - name: Build with Maven
+    - name: Build Docker image
       shell: bash
-      run: mvn -B package --file pom.xml -Dmaven.test.skip=true
+      run: docker build . --file src/main/docker/Dockerfile.jvm --tag academy:$(date +%s)
+    - name: List Docker images
+      shell: bash
+      run: docker image ls
