@@ -23,3 +23,6 @@ runs:
     - name: List Docker images
       shell: bash
       run: docker image ls
+    - name: Export GitHub Environmnet
+      shell: bash
+      run: echo "DOCKER_IMAGE_NAME=${{ inputs.image_name }}" >> $GITHUB_ENV

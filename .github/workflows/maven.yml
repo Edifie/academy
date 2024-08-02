@@ -28,3 +28,5 @@ jobs:
           cache: maven
       - uses: Edifie/academy/.github/actions/maven_build@main
       - uses: Edifie/academy/.github/actions/docker_build@main
+        with:
+          tag_name: "oo_image_oo"
