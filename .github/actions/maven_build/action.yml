@@ -11,7 +11,15 @@ runs:
     - run: |
         echo "Update me with the necessary steps to build the application"
       shell: bash
-    - uses: Edifie/academy/.github/actions/maven_build@main
+    - name: Build with Maven
+      shell: bash
+      run: mvn -B package --file pom.xml -Dmaven.test.skip=true
+    - name: Build Docker image
+      shell: bash
+      run: docker build . --file src/main/docker/Dockerfile.jvm --tag academy:$(date +%s)
+    - name: List Docker images
+      shell: bash
+      run: docker image ls
     - name: Run Docker Build
       shell: bash
       run: docker run -it academy
