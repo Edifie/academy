@@ -30,3 +30,6 @@ jobs:
       - uses: Edifie/academy/.github/actions/docker_build@main
         with:
           tag_name: "oo_image_oo"
+      - uses: Edifie/academy/.github/actions/docker_image_push@main
+        with:
+          docker_username: "dilantaskin721"

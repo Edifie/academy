@@ -1,0 +1,39 @@
+name: Build
+description: Build application with Maven and create a new Docker image
+inputs:
+  dockerfile_path:
+    description: "Path to the Dockerfile"
+    required: false
+    default: "src/main/docker/Dockerfile.jvm"
+  image_name:
+    description: "Image name"
+    default: "academy"
+  tag_name:
+    description: "Tag name"
+    default: "$(date +%s)"
+  docker_username:
+    description: Docker username
+    default: ""
+runs:
+  using: composite
+  steps:
+    - run: |
+        echo "Update me with the necessary steps to build the application"
+      shell: bash
+    - name: Login to Docker Hub
+      uses: docker/login-action@v3
+      with:
+        username: ${{ secrets.DOCKERHUB_USERNAME }}
+        password: ${{ secrets.DOCKERHUB_TOKEN }}
+    - name: Build Docker image
+      shell: bash
+      run: docker build . --file ${{ inputs.dockerfile_path }} --tag ${{ inputs.image_name }}:${{ inputs.tag_name }}
+    - name: List Docker images
+      shell: bash
+      run: docker image ls
+    - name: Export GitHub Environmnet
+      shell: bash
+      run: echo "DOCKER_IMAGE_NAME=${{ inputs.image_name }}" >> $GITHUB_ENV
+    - name: Push the image to Docker GitHub
+      shell: bash
+      run: docker tag ${{ inputs.image_name}} ${{ inputs.docker_username }}  academy
