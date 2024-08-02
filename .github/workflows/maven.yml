@@ -39,10 +39,6 @@ jobs:
           java-version: "21"
           distribution: "temurin"
           cache: maven
-      - uses: actions/setup-java@v4
-        with:
-          distribution: "corretto" # See 'Supported distributions' for available options
-          java-version: "17"
       - uses: Edifie/academy/.github/actions/maven_build@main
       - run: mvn test
       - uses: Edifie/academy/.github/actions/docker_build@main
