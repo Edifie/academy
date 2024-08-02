@@ -20,6 +20,3 @@ runs:
     - name: List Docker images
       shell: bash
       run: docker image ls
-    - name: Run Docker Build
-      shell: bash
-      run: docker run -it academy
